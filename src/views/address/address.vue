@@ -66,16 +66,16 @@
             label="操作"
             width="100">
             <template slot-scope="scope">
-                <el-button @click="editData" type="text" size="small">新增</el-button>
+                <!-- <el-button @click="editData" type="text" size="small">新增</el-button> -->
                 <el-button @click="editData(scope.row)" type="text" size="small">修改</el-button>
             </template>
             </el-table-column>
         </el-table>
         <el-pagination
             layout="prev, pager, next"
-            :total="20"
-            :current-page="query.offset"
-            :pageSize="query.limit"
+            :total="Number(AddressLength)"
+            :current-page="query.page"
+            :pageSize="query.pageSize"
             style="float:right"
             @current-change="handleCurrentChange"
             >
@@ -101,35 +101,26 @@ export default {
             currentObj:[],
             query:{
                 id:'',
-                offset: 1,
-                limit: 4,
+                page: 1,
+                pageSize: 3,
             }
-            // "page": 1,
-            // "pageSize": 4,
-            // "total": 9,
         }
     },
     computed:{
-        ...mapState('address',['tableData','customerData'])
-        
+        ...mapState('address',['tableData','customerData','AddressLength'])
     },
     created(){
-        this.addressFindAll()
+        this.AddressFindQuery(this.query)
     },
     methods:{
-        ...mapActions('address',['addressFindAll','AddressFindById']),
+        ...mapActions('address',['addressFindAll','AddressFindById','AddressFindQuery']),
         handleSelectionChange(item){
             console.log(item)
         },
         editData(row){
             this.visible1 = true
-            if(row.province!==undefined){
-                this.Istitle = '修改用户地址信息'
-                this.currentObj = row
-            }else{
-                this.currentObj = []
-                this.Istitle = '新增用户地址信息'
-            }
+            this.Istitle = '修改用户地址信息'
+            this.currentObj = row
         },
         // 根据顾客id查询
         selectCustomer(val){
@@ -137,12 +128,13 @@ export default {
         },
         // 重置
         resetForm(){
-            this.addressFindAll()
+            this.AddressFindQuery(this.query)
         },
         // 分页
         handleCurrentChange(val){
-            // console.log(val,'vv')
-            this.query.offset = val
+            this.query.page = val
+            this.AddressFindQuery(this.query)
+            // console.log(this.query)
         },
         closeDrawer(val){
             console.log(val,'aval')

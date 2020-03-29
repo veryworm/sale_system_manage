@@ -4,14 +4,20 @@ export default {
   namespaced:true,
   state: {
     tableData:[],
-    customerData:[]
+    customerData:[],
+    AddressLength:''
   },
   getters:{
-   
+   AddressTotal(state){
+     return state.tableData.length
+   }
   },
   mutations: {
    refreshAddress(state,addresses){
     state.tableData = addresses
+   },
+   refreshAddressLength(state,AddressLength){
+    state.AddressLength = AddressLength
    },
    refreshCustomer(state,customerData){
     state.customerData = customerData
@@ -28,13 +34,24 @@ export default {
         commit('refreshAddress',response.data)
         await dispatch("addressFindAll")
       },
+      // 顾客
       async customerFindAll({commit,dispatch}){
         let response = await get(Customerapi.CustomerFind.api)
         commit("refreshCustomer",response.data)
       },
+      // ..
+      async AddressFindQuery({commit,dispatch},query){
+        let response = await post(Addressapi.AddressFindQuery.api,query)
+        commit("refreshAddress",response.data.list)
+        commit("refreshAddressLength",response.data.total)
+        await dispatch("customerFindAll")
+        // console.log(response.data.total)
+      },
       async AddressFindById({commit,dispatch},id){
-        let response = await get(Addressapi.AddressFindById.api+id)
-        commit("refreshAddress",response.data)
+        if(id!==""){
+          let response = await get(Addressapi.AddressFindById.api+id)
+          commit("refreshAddress",response.data)
+        }
       }
   }
 }

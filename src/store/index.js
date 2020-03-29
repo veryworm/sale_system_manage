@@ -8,6 +8,7 @@ import order from './modules/order'
 import customer from './modules/customer'
 import product from './modules/product'
 import address from './modules/address'
+import category from './modules/category'
 // import {Categoryapi,Productapi} from "@/utiles/apiController.js"
 
 const store = new Vuex.Store({
@@ -28,6 +29,7 @@ const store = new Vuex.Store({
     order,
     customer,
     product,
+    category
   }
 })
 

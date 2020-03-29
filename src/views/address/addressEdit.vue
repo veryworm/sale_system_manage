@@ -39,7 +39,6 @@
             <el-form-item>
                 <el-button style="float:right" type="primary" @click="submitForm(ruleForm)">提交</el-button>
             </el-form-item>
-            {{ruleForm}}
         </el-form>
     </el-drawer>
 

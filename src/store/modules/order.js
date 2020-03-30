@@ -5,10 +5,9 @@ export default {
 	namespaced:true,
 	state:{
 		tableData:[],
-		refreshCommentOfVoidData:[],
-		allContent:[],
-		ordersort1:[],
-		searchOrderData:[]
+		tableData2:[], //根据id查数据
+		searchOrderData:[],
+		nosendData:[]
 	},
 	getters:{
 		
@@ -17,29 +16,28 @@ export default {
 		refreshOrder(state,tableData){
 			state.tableData = tableData
 		},
-		refreshCommentOfVoid(state,refreshCommentOfVoidData){
-			state.refreshCommentOfVoidData = refreshCommentOfVoidData
-		},
-		refreshallContent(state,allContent){
-			state.allContent = allContent
+		refreshOrder2(state,tableData2){
+			state.tableData2 = tableData2
 		},
 		// 查询订单数据
 		refreshSearchOrder(state,searchOrderData){
 			state.searchOrderData = searchOrderData
 		},
+		refreshnosendData(state,nosendData){
+			state.nosendData = nosendData
+		}
 		
 	},
 	actions:{
 		async findAllOrder({commit,dispatch,rootState},status){
 			let response = await get(Orderapi.OrderFindAll.api)
-			// for(let i=0;i<rootState.product.productsImg.length;i++){
-			// 	response.data[i].photo = rootState.product.productsImg[i].photo
-			// }
-			// response.data.forEach((item)=>{
-			// 	item.idLabel = item.id
-			// })
 			if(status==undefined){
 				commit("refreshOrder",response.data) 
+				commit("refreshSearchOrder",[]) 
+				let nosendData = response.data.filter((item)=>{
+					return item.status ==  '待派单'
+				})
+				commit("refreshnosendData",nosendData)
 			}else {
 				// 过滤出与当前顾客订单状态相符的订单
 				let currentCustomerOrder = response.data.filter((item)=>{
@@ -51,9 +49,7 @@ export default {
 		// 根据id搜索订单
 		async orderFindById({commit,rootState,dispatch},id){
 			let response = await get(Orderapi.OrderFindById.api+id)
-			// commit("refreshOrder",response.data)
-			console.log(response.data)
-			// dispatch("findProduct",response.data)
+			dispatch("findProduct",response.data)
 		},
 		async findProduct({commit,dispatch},searchOrderData){
 			let response = await get(Productapi.ProductFindAll.api)
@@ -69,6 +65,11 @@ export default {
 			    })
 			})
 			commit("refreshSearchOrder",arr1)
+		},
+		// 指定waiterId和orederId派单
+		async sendOrderHandler({commit,dispatch},params){
+			let response = await get(Orderapi.OrderSend.api,params)
+			await dispatch("findAllOrder")
 		}
 	}
 }

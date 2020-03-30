@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// import user from './modules/user'
+import waiter from './modules/waiter'
 import order from './modules/order'
 import customer from './modules/customer'
 import product from './modules/product'
@@ -29,7 +29,8 @@ const store = new Vuex.Store({
     order,
     customer,
     product,
-    category
+    category,
+    waiter
   }
 })
 

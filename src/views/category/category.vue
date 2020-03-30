@@ -101,7 +101,6 @@ export default {
             })
         },
         closeDrawer(val){
-            console.log(val,'aval')
             this.visible1 = val
         },
         submitForm(){

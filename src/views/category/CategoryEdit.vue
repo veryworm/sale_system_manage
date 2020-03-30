@@ -104,7 +104,7 @@ export default {
                     });
                 })
                 .catch((res)=>{
-                    console.log(res)
+                    // console.log(res)
                 })
            }else {
                this.CategoryEdit(ruleForm)
@@ -116,7 +116,7 @@ export default {
                     });
                 })
                 .catch((res)=>{
-                    console.log(res)
+                    // console.log(res)
                 })
            }
        },
@@ -142,7 +142,7 @@ export default {
             this.ruleForm.icon = ""
         },
         handlePreview(file) {
-            console.log(file,'dianji');
+            // console.log(file,'dianji');
         }
     }
 }

@@ -29,13 +29,17 @@ const Orderapi = {
 	OrderConfirm:{api:'/order/confirmOrder?orderId='},
 	OrderFindAll:{api:'/order/findAll'},
 	OrderFindById:{api:'/order/getOrderLinesByOrderId?orderId='},
-	OrderDeleteById:{api:'/order/deleteById?id='}
+	OrderDeleteById:{api:'/order/deleteById?id='},
+	OrderSend:{api:'/order/sendOrder'}
 }
 const Addressapi = {
 	AddressSave:{api:'/address/saveOrUpdate'},
 	AddressFindAll:{api:'/address/findAll'},
 	AddressFindQuery:{api:'/address/query'},
 	AddressFindById:{api:'/address/findByCustomerId?id='}
+}
+const Waiterapi = {
+	WaiterFindAll:{api:'/waiter/findAll'}
 }
 export {
 	Categoryapi,
@@ -44,7 +48,8 @@ export {
 	Addressapi,
 	Customerapi,
 	Orderapi,
-	Commentapi
+	Commentapi,
+	Waiterapi
 	
 }
 

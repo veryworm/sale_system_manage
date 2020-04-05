@@ -179,7 +179,6 @@
                 </el-option>
             </el-select>
         </el-form-item>
-        {{sendOrderForm}}
         <el-form-item>
             <el-button style="float:right" type="primary" @click="submitForm2(sendOrderForm)">提交</el-button>
         </el-form-item>

@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Manager from '../App.vue'
+import { setToken, getToken, removeToken } from '../../utiles/auth.js'
+import store from '../store'
+
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
   // {
   //   path: '/address',
   //   name: 'address',
@@ -19,6 +18,35 @@ const routes = [
   //   component: () => import(/* webpackChunkName: "about" */ '../views/address/address.vue')，
     
   // }
+  {
+    path: '/',
+    redirect:'/login'
+  },
+  {
+    path: '/manager',
+    component:Manager,
+    beforeEnter: (to,from,next) => {
+      let token = getToken();
+      if(token){
+        store.dispatch('user/info',token)
+        .then(()=>{
+          // 获取到用户后再跳转
+          next();
+        })
+      }else{
+          Toast("token失效")
+          this.$message({
+            message:"Token失效，请重新登录"
+          })
+          // 跳转到登录
+          next({path:'/login'})
+      }
+    }
+  },
+  {
+    path:'/login',
+    component: () => import('../views/login/login.vue')
+  },
   {
     path: '/address',
     name: 'address',

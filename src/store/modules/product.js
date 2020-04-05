@@ -22,21 +22,6 @@ export default {
 	}
   },
   actions: {
-      searchProducts({state,commit }){
-      	uni.request({
-      	    url: Productapi.ProductFindAll.api, 
-      		method: Productapi.ProductFindAll.methods,
-      	    header: {
-      	        'Accept': 'application/json'
-      	    },
-      	    success: (res) => {
-				commit('refreshProducts',res.data.data)
-				commit('refreshProductsImg',res.data.data)
-      	    },
-      		fail: (res) =>{
-      			// 功能注册
-      		}
-      	})
-      }
+      
   }
 }

@@ -1,4 +1,5 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
+import { setToken, getToken, removeToken } from '../../../utiles/auth.js'
 export const mixStatus = {
 	data(){
 		return {
@@ -69,7 +70,7 @@ export const mixStatus = {
 	},
 	methods:{
 		...mapActions('product',['searchProducts']),
-		// ...mapActions('user',['info1']),
+		...mapActions('user',['info1']),
 		async search(){
 			let resp =  await this.searchBody.call(this)
 			if(resp){
@@ -78,6 +79,17 @@ export const mixStatus = {
 				return null
 			}
 			return null
+		},
+		allrefreshtoken(){
+			let token = getToken()
+			if(token){
+				this.info1(token)
+			}else{
+				this.$message({
+					message:"token失效,请重新登录",
+					type:'warning'
+				})
+			}
 		}
 	}
 }

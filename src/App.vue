@@ -1,21 +1,27 @@
 <template>
   <div id="app">
-    <el-row class="home_header">
+    <div :style="{display:info.id == undefined?'none':'block'}">
+      <el-row class="home_header">
+        <el-col :span="4">
+          <div class="header_img">
+            <!-- <img style="border-radius:20px" src="../assets/logo.png" alt=""> -->
+          </div>
+        </el-col>
+        <el-col :span="14 ">
+          <div class="header_title">
+              <span>零食客后台管理系统</span>
+          </div>
+        </el-col>
+        <el-col :offset="2" :span="4">
+          <div class="header_title">
+              <img style="width: 30px; margin-top:10px; height:30px ; border-radius: 50%;" :src="info.avatar" alt="">
+              <span style="font-size:20px">{{info.name}}</span>
+              <span class="hover_logout" @click="logoutAdmin" style="font-size:14px;color:blue">退出</span>
+          </div>
+        </el-col>
+      </el-row>
       <el-col :span="4">
-        <div class="header_img">
-          <!-- <img style="border-radius:20px" src="../assets/logo.png" alt=""> -->
-        </div>
-      </el-col>
-      <el-col :span="18">
-        <div class="header_title">
-            <span>零食客后台管理系统</span>
-        </div>
-      </el-col>
-    </el-row>
-      <el-col :span="4">
-        <el-menu
-          class="el-menu-vertical-demo"
-          >
+        <el-menu class="el-menu-vertical-demo">
           <router-link to="/address">
             <el-submenu index="1">
               <template slot="title">
@@ -55,9 +61,42 @@
 
         </el-menu>
       </el-col>
+    </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import { mapState, mapActions } from 'vuex'
+import {mixStatus} from './store/modules/mix.js'
+export default {
+  mixins:[mixStatus],
+  data(){
+    return{
+
+    }
+  },
+  computed:{
+    ...mapState('user',['info'])
+  },
+  created(){
+    this.allrefreshtoken()
+  },
+  methods:{
+    ...mapActions('user',['logout']),
+    logoutAdmin(){
+      this.logout()
+      .then(()=>{
+         this.$message({
+           message:'退出成功',
+           type: 'success'
+         });
+         this.$router.push('/login')
+      })
+    }
+  }
+}
+</script>
 
 <style>
 #nav a.router-link-exact-active {
@@ -106,5 +145,11 @@
   }
   .el-col {
     border-radius: 4px;
+  }
+  .info_img{
+    float: right;;
+  }
+  .hover_logout:hover{
+    cursor: pointer;
   }
 </style>

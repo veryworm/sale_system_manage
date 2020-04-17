@@ -14,7 +14,7 @@
             style="border-bottom:1px solid #eee;margin-bottom:10px;"
             >
             <el-form-item>
-                <el-select @change="selectOrderId" clearable v-model="query.orderId" placeholder="请选择顾客">
+                <el-select @change="selectOrderId" clearable v-model="query.orderId" placeholder="请选择订单id">
                     <el-option
                     v-for="item in tableData"
                     :key="item.orderTime"
@@ -34,7 +34,7 @@
                 :data="tableData"
                 max-height="600px"
                 tooltip-effect="dark"
-                style="width: 100%"
+                style="width: 95%"
                 @selection-change="handleSelectionChange">
 
                 <el-table-column

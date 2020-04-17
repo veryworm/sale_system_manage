@@ -32,7 +32,12 @@ export default {
       async addressEdit({commit,dispatch},addressData){
         let response = await post_array(Addressapi.AddressSave.api,addressData)
         commit('refreshAddress',response.data)
-        await dispatch("addressFindAll")
+        let query = {
+            id:'',
+            page: 1,
+            pageSize: 3,
+        }
+        await dispatch("AddressFindQuery",query)
       },
       // 顾客
       async customerFindAll({commit,dispatch}){

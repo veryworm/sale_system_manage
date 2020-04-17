@@ -29,7 +29,7 @@
             :data="tableData"
             max-height="600px"
             tooltip-effect="dark"
-            style="width: 100%"
+            style="width: 80%"
             @selection-change="handleSelectionChange">
             <el-table-column
             type="selection"
@@ -76,7 +76,7 @@
             :total="Number(AddressLength)"
             :current-page="query.page"
             :pageSize="query.pageSize"
-            style="float:right"
+            style="float:right;margin-right:300px"
             @current-change="handleCurrentChange"
             >
         </el-pagination>

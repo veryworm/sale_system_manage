@@ -5,7 +5,7 @@
     :visible.sync="visible2"
     :direction="direction"
     :before-close="handleClose">
-        <el-form :model="ruleForm" status-icon  ref="ruleForm" label-width="100px" size="mini" class="demo-ruleForm">
+        <el-form :model="ruleForm" status-icon  ref="ruleForm" label-width="100px"  class="demo-ruleForm">
             <el-form-item label="商品名称" prop="checkPass">
                 <el-col :span="12">
                     <el-input type="text" v-model="ruleForm.name" autocomplete="off"></el-input>

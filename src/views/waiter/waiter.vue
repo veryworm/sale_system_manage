@@ -7,7 +7,7 @@
             :data="waiterData"
             max-height="600px"
             tooltip-effect="dark"
-            style="width: 100%"
+            style="width: 95%"
            >
 
             <el-table-column

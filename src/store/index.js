@@ -6,7 +6,7 @@ Vue.use(Vuex)
 import waiter from './modules/waiter'
 import order from './modules/order'
 import customer from './modules/customer'
-// import product from './modules/product'
+import product from './modules/product'
 import address from './modules/address'
 import category from './modules/category'
 import user from './modules/user'
@@ -29,7 +29,7 @@ const store = new Vuex.Store({
     address,
     order,
     customer,
-    // product,
+    product,
     category,
     waiter,
     user

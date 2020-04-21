@@ -7,8 +7,10 @@ const Categoryapi= {
 	CategoryEdit:{api:'/category/saveOrUpdate'}
 }
 const Productapi= {
-	ProductFindAll:{api:baseURL + '/product/findAll',methods:'GET'},
-	ProductFindById:{api:baseURL + '/product/findById',methods:'GET'}
+	ProductFindAll:{api:'/product/findAll',methods:'GET'},
+	ProductFindById:{api:'/product/findById',methods:'GET'},
+	ProductEdit:{api:'/product/saveOrUpdate'},
+	ProductDeleteById:{api:'/product/deleteById?id='},
 }
 const Userapi = {
 	Userinfo:{api:'/user/info',methods:'GET'},

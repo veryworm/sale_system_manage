@@ -1,9 +1,10 @@
-import {Categoryapi,Productapi} from "../../../utiles/apiController.js"
+import {Productapi} from "../../../utiles/apiController.js"
+import { post_array, post_json, post_obj_array, get, post} from '../../../http/axios.js'
+
 export default {
   namespaced:true,
   state: {
-    products:[],
-    productsImg:[]
+    products:[]
   },
   getters:{
     productFilter(state){
@@ -13,15 +14,20 @@ export default {
   mutations: {
     refreshProducts(state,products){
       state.products = products;
-    },
-	refreshProductsImg(state,productsImg){
-	  let arr = productsImg.filter((item)=>{
-		  return item.photo !== null
-	  })
-	  state.productsImg = arr
-	}
+    }
   },
   actions: {
-      
+    async ProductFindAll({commit,dispatch}){
+      let response = await get(Productapi.ProductFindAll.api)
+      commit('refreshProducts',response.data)
+    },
+    async ProductEdit({commit,dispatch},ProductData){
+      let response = await post_array(Productapi.ProductEdit.api,ProductData)
+      await dispatch("ProductFindAll")
+    },
+    async deleteIdHandler({commit,dispatch},id){
+      let response = await get(Productapi.ProductDeleteById.api+id)
+      await dispatch('ProductFindAll')
+    }
   }
 }

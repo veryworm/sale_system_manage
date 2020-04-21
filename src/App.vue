@@ -38,22 +38,29 @@
           </el-menu-item>
           </router-link>
 
-          <router-link to="/customer">
+          <router-link to="/product">
             <el-menu-item index="3">
+            <i class="el-icon-menu"></i>
+            <span slot="title">产品管理</span>
+          </el-menu-item>
+          </router-link>
+
+          <router-link to="/customer">
+            <el-menu-item index="4">
             <i class="el-icon-menu"></i>
             <span slot="title">顾客管理</span>
           </el-menu-item>
           </router-link>
 
           <router-link to="/order">
-            <el-menu-item index="4">
+            <el-menu-item index="5">
             <i class="el-icon-menu"></i>
             <span slot="title">订单管理</span>
           </el-menu-item>
           </router-link>
 
           <router-link to="/waiter">
-            <el-menu-item index="5">
+            <el-menu-item index="6">
             <i class="el-icon-menu"></i>
             <span slot="title">快递员管理</span>
           </el-menu-item>

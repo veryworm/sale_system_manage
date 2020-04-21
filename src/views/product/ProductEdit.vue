@@ -105,7 +105,11 @@ export default {
            this.ruleForm.parentId =val
        },
        submitForm(ruleForm){
+<<<<<<< HEAD
         
+=======
+            this.ruleForm.status = '100'
+>>>>>>> ee4da26af3c7f6f123ca1ab03df881ba6ca80cc9
            if(this.title=='修改产品'){
                this.ruleForm.id = this.currentObj.id
                this.ProductEdit(ruleForm)
@@ -120,11 +124,19 @@ export default {
                     // console.log(res)
                 })
            }else {
+<<<<<<< HEAD
                ruleForm.status = '100'
                this.ProductEdit(ruleForm)
                 .then(()=>{
                     this.handleClose()
                     this.$message({     
+=======
+               console.log(this.ruleForm,'增加')
+               this.ProductEdit(ruleForm)
+                .then(()=>{
+                    this.handleClose()
+                    this.$message({
+>>>>>>> ee4da26af3c7f6f123ca1ab03df881ba6ca80cc9
                         message: '增加成功',
                         type: 'success'
                     });
